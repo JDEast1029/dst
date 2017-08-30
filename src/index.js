@@ -5,7 +5,6 @@ import './style1.css'
 // import Icon from './bg.png';
 import React from 'react';
 import { Link } from 'react-redux'
-import 'echarts';
 
 function component() {
   var element = document.createElement('div');

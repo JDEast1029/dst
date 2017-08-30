@@ -12,13 +12,13 @@ module.exports = {
      */
     devtool: "cheap-module-source-map",
 
-    externals: {
-        "react": 'react',
-        "react-dom": 'react-dom',
-        "react-router": 'react-router',
-        "lodash": "lodash",
-        "echarts": "echarts"
-    },
+    // externals: {
+    //     "react": 'react',
+    //     "react-dom": 'react-dom',
+    //     "react-router": 'react-router',
+    //     "lodash": "lodash",
+    //     "echarts": "echarts"
+    // },
     
     /**
      * 如果是字符串，output输出的名字是 ‘main’
@@ -27,7 +27,7 @@ module.exports = {
     entry: {
         app: './src/index.js',
         print: './src/print.js',
-        // vendor: ['react', 'react-redux', 'react-dom']
+        vendor: ['react', 'react-redux', 'react-dom', 'lodash']
     },
     /**
      * [name]     : 使用入口名称
@@ -161,10 +161,10 @@ module.exports = {
             names: ['common'],
             chunks: ['app', 'print']
         }),
-        // new webpack.optimize.CommonsChunkPlugin({
-        //     names: ['vendor', 'manifest'],
-        //     chunks: ['vendor']
-        // }),
+        new webpack.optimize.CommonsChunkPlugin({
+            names: ['vendor', 'manifest'],
+            chunks: ['vendor']
+        }),
         /**
          * 将所有的入口 chunk(entry chunks)中引用的 *.css，移动到独立分离的 CSS 文件
          * 多个入口情况：
@@ -180,10 +180,10 @@ module.exports = {
             filename: "css/initial.[name].[contenthash:6].css"
         }),
 
-        new webpack.DllReferencePlugin({
-			context: path.resolve(__dirname, 'dist'),
-			manifest: './dist/manifest.json',
-		}),
+        // new webpack.DllReferencePlugin({
+		// 	context: path.resolve(__dirname, 'dist'),
+		// 	manifest: './dist/manifest.json',
+		// }),
     ],
     devServer: {
         /**
